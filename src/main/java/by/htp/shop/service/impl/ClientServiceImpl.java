@@ -4,12 +4,14 @@ import by.htp.shop.bean.ClientData;
 import by.htp.shop.dao.ClientDAO;
 import by.htp.shop.dao.exception.DAOException;
 import by.htp.shop.dao.factory.DAOFactory;
+import by.htp.shop.service.ClientService;
 import by.htp.shop.service.exception.EmptyFieldsException;
 import by.htp.shop.service.exception.LoginException;
 import by.htp.shop.service.exception.ServiceException;
 
-public class ClientServiceImpl {
+public class ClientServiceImpl implements ClientService{
 	
+	@Override
 	public ClientData loginClient(String login, String password) throws ServiceException, LoginException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
 		ClientDAO clientsDAO = daoObjectFactory.getClientImplDAO();
@@ -26,12 +28,14 @@ public class ClientServiceImpl {
 		}
 	}
 
+	@Override
 	public void checkEmptyFields(ClientData clientData) throws EmptyFieldsException {
 		if (isEmptyFieldExist(clientData)) {
 			throw new EmptyFieldsException("empty fields found");
 		}
 	}
 	
+	@Override
 	public void checkLogin(String login) throws ServiceException, LoginException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
 		ClientDAO clientsDAO = daoObjectFactory.getClientImplDAO();
@@ -45,7 +49,8 @@ public class ClientServiceImpl {
 		}
 	}
 	
-	public void registerClient (ClientData clientData) throws ServiceException{
+	@Override
+	public void registerClient (ClientData clientData) throws ServiceException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
 		ClientDAO clientsDAO = daoObjectFactory.getClientImplDAO();
 		

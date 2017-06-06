@@ -1,5 +1,7 @@
 package by.htp.shop.service.factory;
 
+import by.htp.shop.service.ClientService;
+import by.htp.shop.service.EquipmentService;
 import by.htp.shop.service.impl.ClientServiceImpl;
 import by.htp.shop.service.impl.EquipmentServiceImpl;
 
@@ -16,11 +18,11 @@ public final class ServiceFactory {
 		return instance;
 	}
 
-	public ClientServiceImpl getClientServiceImpl() {
+	public ClientService getClientServiceImpl() {
 		return clientServiceImpl;
 	}
 	
-	public EquipmentServiceImpl getEquipmentServiceImpl() {
+	public EquipmentService getEquipmentServiceImpl() {
 		return equipmentServiceImpl;
 	}
 	

@@ -15,9 +15,9 @@ import by.htp.shop.bean.ClientData;
 import by.htp.shop.bean.Item;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
+import by.htp.shop.service.EquipmentService;
 import by.htp.shop.service.exception.ServiceException;
 import by.htp.shop.service.factory.ServiceFactory;
-import by.htp.shop.service.impl.EquipmentServiceImpl;
 
 public class ShowMainPage implements Command {
 	private final static Logger LOGGER = Logger.getLogger(ShowMainPage.class);
@@ -35,7 +35,7 @@ public class ShowMainPage implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		EquipmentServiceImpl eqipmentService = serviceFactory.getEquipmentServiceImpl();
+		EquipmentService eqipmentService = serviceFactory.getEquipmentServiceImpl();
 
 		RequestDispatcher dispatcher = null;
 

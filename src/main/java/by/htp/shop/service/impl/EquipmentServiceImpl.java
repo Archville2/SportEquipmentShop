@@ -7,10 +7,12 @@ import by.htp.shop.dao.EquipmentDAO;
 import by.htp.shop.dao.exception.DAOException;
 import by.htp.shop.dao.exception.EquipmentAlreadyExistsException;
 import by.htp.shop.dao.factory.DAOFactory;
+import by.htp.shop.service.EquipmentService;
 import by.htp.shop.service.exception.ServiceException;
 
-public class EquipmentServiceImpl {
+public class EquipmentServiceImpl implements EquipmentService {
 	
+	@Override
 	public boolean isInCart(List<Integer> cart, int id) {
 		for (Integer cartIDs : cart) {
 			if (cartIDs == id) {
@@ -20,6 +22,7 @@ public class EquipmentServiceImpl {
 		return false;
 	}
 
+	@Override
 	public void addRentedItem(int clientId, int equipmentId, int days) throws ServiceException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
 		EquipmentDAO equipmentDAO = daoObjectFactory.getEquipmentDAOImpl();
@@ -33,7 +36,8 @@ public class EquipmentServiceImpl {
 		}
 	}
 	
-	public List<Item> formCartEquipment (List<Integer> cart) throws ServiceException{
+	@Override
+	public List<Item> formCartEquipment (List<Integer> cart) throws ServiceException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
 		EquipmentDAO equipmentDAO = daoObjectFactory.getEquipmentDAOImpl();
 				
@@ -44,6 +48,7 @@ public class EquipmentServiceImpl {
 		}
 	}
 	
+	@Override
 	public List<String> formCategoryElementList() throws ServiceException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
 		EquipmentDAO equipmentDAO = daoObjectFactory.getEquipmentDAOImpl();
@@ -57,6 +62,7 @@ public class EquipmentServiceImpl {
 		}
 	}
 	
+	@Override
 	public List<Item> formEquipmentList(String folder) throws ServiceException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
 		EquipmentDAO equipmentDAO = daoObjectFactory.getEquipmentDAOImpl();
@@ -69,6 +75,7 @@ public class EquipmentServiceImpl {
 		}
 	}
 	
+	@Override
 	public List<Item> formClientEquipment(int clientId) throws ServiceException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
 		EquipmentDAO equipmentDAO = daoObjectFactory.getEquipmentDAOImpl();
@@ -81,6 +88,7 @@ public class EquipmentServiceImpl {
 
 	}
 	
+	@Override
 	public void removeRentedEquipment(int clientId, int equipmentId) throws ServiceException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
 		EquipmentDAO equipmentDAO = daoObjectFactory.getEquipmentDAOImpl();

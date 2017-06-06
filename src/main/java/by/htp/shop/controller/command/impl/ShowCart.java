@@ -15,9 +15,9 @@ import by.htp.shop.bean.ClientData;
 import by.htp.shop.bean.Item;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
+import by.htp.shop.service.EquipmentService;
 import by.htp.shop.service.exception.ServiceException;
 import by.htp.shop.service.factory.ServiceFactory;
-import by.htp.shop.service.impl.EquipmentServiceImpl;
 
 public class ShowCart implements Command {
 	private final static Logger LOGGER = Logger.getLogger(ShowCart.class);
@@ -26,7 +26,7 @@ public class ShowCart implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		EquipmentServiceImpl equipmentService = serviceFactory.getEquipmentServiceImpl();
+		EquipmentService equipmentService = serviceFactory.getEquipmentServiceImpl();
 		HttpSession session = request.getSession(true);
 		ClientData clientData = (ClientData) session.getAttribute("user");
 		List<Integer> cart = clientData.getCart();

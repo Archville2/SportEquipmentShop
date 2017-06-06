@@ -9,8 +9,8 @@ import javax.servlet.http.HttpSession;
 import by.htp.shop.bean.ClientData;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
+import by.htp.shop.service.EquipmentService;
 import by.htp.shop.service.factory.ServiceFactory;
-import by.htp.shop.service.impl.EquipmentServiceImpl;
 
 public class AddToCart implements Command {
 
@@ -20,7 +20,7 @@ public class AddToCart implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		EquipmentServiceImpl equipmentService = serviceFactory.getEquipmentServiceImpl();
+		EquipmentService equipmentService = serviceFactory.getEquipmentServiceImpl();
 		int id = Integer.parseInt(request.getParameter(CART));
 
 		HttpSession session = request.getSession(true);

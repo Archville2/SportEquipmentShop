@@ -15,11 +15,11 @@ import by.htp.shop.bean.ClientData;
 import by.htp.shop.bean.Item;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
+import by.htp.shop.service.ClientService;
+import by.htp.shop.service.EquipmentService;
 import by.htp.shop.service.exception.LoginException;
 import by.htp.shop.service.exception.ServiceException;
 import by.htp.shop.service.factory.ServiceFactory;
-import by.htp.shop.service.impl.ClientServiceImpl;
-import by.htp.shop.service.impl.EquipmentServiceImpl;
 
 /**
  * Perform login class. Execution order - get client's info from db, check
@@ -42,8 +42,8 @@ public class LoginClient implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		ClientServiceImpl clientService = serviceFactory.getClientServiceImpl();
-		EquipmentServiceImpl equipmentService = serviceFactory.getEquipmentServiceImpl();
+		ClientService clientService = serviceFactory.getClientServiceImpl();
+		EquipmentService equipmentService = serviceFactory.getEquipmentServiceImpl();
 
 		RequestDispatcher dispatcher = null;
 		String login = request.getParameter(LOGIN_PARAMETER);
