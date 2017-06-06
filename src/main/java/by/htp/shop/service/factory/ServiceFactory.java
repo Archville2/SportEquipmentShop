@@ -1,13 +1,13 @@
 package by.htp.shop.service.factory;
 
-import by.htp.shop.service.impl.ClientImplService;
-import by.htp.shop.service.impl.ItemImplService;
+import by.htp.shop.service.impl.ClientServiceImpl;
+import by.htp.shop.service.impl.EquipmentServiceImpl;
 
 public final class ServiceFactory {
 	private static final ServiceFactory instance = new ServiceFactory();
 
-	private final ClientImplService clientImplService = new ClientImplService();
-	private final ItemImplService itemImplService = new ItemImplService();
+	private final ClientServiceImpl clientServiceImpl = new ClientServiceImpl();
+	private final EquipmentServiceImpl equipmentServiceImpl = new EquipmentServiceImpl();
 
 	private ServiceFactory() {
 	}
@@ -16,12 +16,12 @@ public final class ServiceFactory {
 		return instance;
 	}
 
-	public ClientImplService getClientImplService() {
-		return clientImplService;
+	public ClientServiceImpl getClientServiceImpl() {
+		return clientServiceImpl;
 	}
 	
-	public ItemImplService getItemImplService() {
-		return itemImplService;
+	public EquipmentServiceImpl getEquipmentServiceImpl() {
+		return equipmentServiceImpl;
 	}
 	
 }

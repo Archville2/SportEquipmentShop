@@ -1,9 +1,9 @@
 package by.htp.shop.dao.impl;
 
 import by.htp.shop.bean.Item;
-import by.htp.shop.dao.ItemsDAO;
+import by.htp.shop.dao.EquipmentDAO;
 import by.htp.shop.dao.exception.DAOException;
-import by.htp.shop.dao.exception.ItemAlreadyExistsException;
+import by.htp.shop.dao.exception.EquipmentAlreadyExistsException;
 
 import org.apache.log4j.Logger;
 
@@ -15,9 +15,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemImplDAO implements ItemsDAO {
+public class EquipmentDAOImpl implements EquipmentDAO {
 
-    private final static Logger LOGGER = Logger.getLogger(ItemImplDAO.class);
+    private final static Logger LOGGER = Logger.getLogger(EquipmentDAOImpl.class);
 
     private DataSource dataSource;
 
@@ -28,12 +28,12 @@ public class ItemImplDAO implements ItemsDAO {
 	final String CLIENT_ITEMS = "SELECT * FROM equipment, rented_items WHERE equipment.id=rented_items.equipment_id AND rented_items.client_id=?";
 	final String REMOVE_RENTED_ITEM = "DELETE FROM rented_items WHERE client_id=? AND equipment_id=?";
 
-    public ItemImplDAO(DataSource dataSource) {
+    public EquipmentDAOImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @Override
-    public void removeRentedItem(int clientId, int equipmentId) throws DAOException {
+    public void removeRentedEquipment(int clientId, int equipmentId) throws DAOException {
         final int CLIENTS_ID = 1;
         final int EQUIPMENT_ID = 2;
 
@@ -50,7 +50,7 @@ public class ItemImplDAO implements ItemsDAO {
     }
 
     @Override
-    public List<Item> findClientItems(int clientId) throws DAOException {
+    public List<Item> findClientEquipment(int clientId) throws DAOException {
         final int ID = 1;
         final int TYPE = 2;
         final int NAME = 3;
@@ -88,7 +88,7 @@ public class ItemImplDAO implements ItemsDAO {
 	}
 
     @Override
-    public void addRentedItem(int clientId, int equipmentId, int days) throws DAOException, ItemAlreadyExistsException {
+    public void addRentedEquipment(int clientId, int equipmentId, int days) throws DAOException, EquipmentAlreadyExistsException {
         final int CLIENT_ID = 1;
         final int EQUIPMENT_ID = 2;
         final int DATE = 3;
@@ -104,7 +104,7 @@ public class ItemImplDAO implements ItemsDAO {
 
 		} catch (SQLException e) {
 			if (e.getErrorCode() == 1062) {
-				throw new ItemAlreadyExistsException("duplicated primary key found. Item ID: " + equipmentId);
+				throw new EquipmentAlreadyExistsException("duplicated primary key found. Item ID: " + equipmentId);
 			}
 			LOGGER.error(e.getMessage(), e);
             throw new DAOException("Exception in addRentedItem", e);
@@ -112,7 +112,7 @@ public class ItemImplDAO implements ItemsDAO {
     }
 
     @Override
-    public List<Item> findCartItems(List<Integer> cart) throws DAOException {
+    public List<Item> findCartEquipment(List<Integer> cart) throws DAOException {
         final int ID = 1;
         final int TYPE = 2;
         final int NAME = 3;
@@ -152,7 +152,7 @@ public class ItemImplDAO implements ItemsDAO {
     }
 
     @Override
-    public List<Item> formItemList(String folder) throws DAOException {
+    public List<Item> formEquipmentList(String folder) throws DAOException {
         final int ID = 1;
         final int TYPE = 2;
         final int NAME = 3;

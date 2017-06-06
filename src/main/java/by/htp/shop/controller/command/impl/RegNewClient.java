@@ -17,7 +17,7 @@ import by.htp.shop.service.exception.EmptyFieldsException;
 import by.htp.shop.service.exception.LoginException;
 import by.htp.shop.service.exception.ServiceException;
 import by.htp.shop.service.factory.ServiceFactory;
-import by.htp.shop.service.impl.ClientImplService;
+import by.htp.shop.service.impl.ClientServiceImpl;
 
 public class RegNewClient implements Command {
 	private final static Logger LOGGER = Logger.getLogger(RegNewClient.class);
@@ -31,7 +31,7 @@ public class RegNewClient implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		ClientImplService clientService = serviceFactory.getClientImplService();
+		ClientServiceImpl clientService = serviceFactory.getClientServiceImpl();
 		
 		ClientData clientData = new ClientData(
 				0,

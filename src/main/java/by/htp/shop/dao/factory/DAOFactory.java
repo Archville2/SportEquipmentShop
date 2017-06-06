@@ -1,9 +1,9 @@
 package by.htp.shop.dao.factory;
 
-import by.htp.shop.dao.ClientsDAO;
-import by.htp.shop.dao.ItemsDAO;
-import by.htp.shop.dao.impl.ClientImplDAO;
-import by.htp.shop.dao.impl.ItemImplDAO;
+import by.htp.shop.dao.ClientDAO;
+import by.htp.shop.dao.EquipmentDAO;
+import by.htp.shop.dao.impl.ClientDAOImpl;
+import by.htp.shop.dao.impl.EquipmentDAOImpl;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.log4j.Logger;
 
@@ -37,12 +37,12 @@ public final class DAOFactory {
 		return instance;
 	}
 
-	public ClientsDAO getClientImplDAO() {
-		return new ClientImplDAO(dataSource);
+	public ClientDAO getClientImplDAO() {
+		return new ClientDAOImpl(dataSource);
 	}
 
-	public ItemsDAO getItemImplDAO() {
-		return new ItemImplDAO(dataSource);
+	public EquipmentDAO getEquipmentDAOImpl() {
+		return new EquipmentDAOImpl(dataSource);
 	}
 
 	private ComboPooledDataSource getDataSource() throws SQLException {

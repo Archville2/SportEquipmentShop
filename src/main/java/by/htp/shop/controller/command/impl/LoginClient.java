@@ -18,8 +18,8 @@ import by.htp.shop.controller.exception.ControllerException;
 import by.htp.shop.service.exception.LoginException;
 import by.htp.shop.service.exception.ServiceException;
 import by.htp.shop.service.factory.ServiceFactory;
-import by.htp.shop.service.impl.ClientImplService;
-import by.htp.shop.service.impl.ItemImplService;
+import by.htp.shop.service.impl.ClientServiceImpl;
+import by.htp.shop.service.impl.EquipmentServiceImpl;
 
 /**
  * Perform login class. Execution order - get client's info from db, check
@@ -42,8 +42,8 @@ public class LoginClient implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		ClientImplService clientService = serviceFactory.getClientImplService();
-		ItemImplService itemService = serviceFactory.getItemImplService();
+		ClientServiceImpl clientService = serviceFactory.getClientServiceImpl();
+		EquipmentServiceImpl equipmentService = serviceFactory.getEquipmentServiceImpl();
 
 		RequestDispatcher dispatcher = null;
 		String login = request.getParameter(LOGIN_PARAMETER);
@@ -54,10 +54,10 @@ public class LoginClient implements Command {
 	
 			if (clientData != null) {
 
-				List<Item> itemList = itemService.formItemList("%");
-				List<String> categoryList = itemService.formCategoryElementList();
+				List<Item> equipmentList = equipmentService.formEquipmentList("%");
+				List<String> categoryList = equipmentService.formCategoryElementList();
 				request.setAttribute("category", categoryList);
-				request.setAttribute("items", itemList);
+				request.setAttribute("equipment", equipmentList);
 
 				HttpSession session = request.getSession(true);
 				session.setAttribute("user", clientData);

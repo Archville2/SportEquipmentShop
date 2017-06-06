@@ -46,7 +46,7 @@
 	<table border="0" width="100%">
     <tr>
         <td width="100%" valign="top">
-			<c:forEach var="field" items="${my_items}">
+			<c:forEach var="field" items="${client_items}">
 				<table border="1" width="95%">
 					<tr align="center">
 						<td rowspan="2" width="20%"><img src="img/${field.img}"></td>

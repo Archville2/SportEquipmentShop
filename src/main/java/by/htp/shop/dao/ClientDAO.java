@@ -3,7 +3,7 @@ package by.htp.shop.dao;
 import by.htp.shop.bean.ClientData;
 import by.htp.shop.dao.exception.DAOException;
 
-public interface ClientsDAO {
+public interface ClientDAO {
 
 	ClientData formClientData(String login, String password) throws DAOException;
 	

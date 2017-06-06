@@ -1,7 +1,7 @@
 package by.htp.shop.dao.impl;
 
 import by.htp.shop.bean.ClientData;
-import by.htp.shop.dao.ClientsDAO;
+import by.htp.shop.dao.ClientDAO;
 import by.htp.shop.dao.exception.DAOException;
 import org.apache.log4j.Logger;
 
@@ -11,9 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ClientImplDAO implements ClientsDAO {
+public class ClientDAOImpl implements ClientDAO {
 
-	private final static Logger LOGGER = Logger.getLogger(ClientImplDAO.class);
+	private final static Logger LOGGER = Logger.getLogger(ClientDAOImpl.class);
 
 	private DataSource dataSource;
 
@@ -21,7 +21,7 @@ public class ClientImplDAO implements ClientsDAO {
 	final String GET_CLIENT_INFORMATION = "SELECT * FROM clients WHERE login=? AND password=?";
 	final String ADD_CLIENT = "INSERT INTO clients (name,surname,email,phone,login,password,status) VALUES (?,?,?,?,?,?,?)";
 
-	public ClientImplDAO(DataSource dataSource){
+	public ClientDAOImpl(DataSource dataSource){
         this.dataSource = dataSource;
     }
 

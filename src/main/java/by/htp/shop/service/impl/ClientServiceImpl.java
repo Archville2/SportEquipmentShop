@@ -1,18 +1,18 @@
 package by.htp.shop.service.impl;
 
 import by.htp.shop.bean.ClientData;
-import by.htp.shop.dao.ClientsDAO;
+import by.htp.shop.dao.ClientDAO;
 import by.htp.shop.dao.exception.DAOException;
 import by.htp.shop.dao.factory.DAOFactory;
 import by.htp.shop.service.exception.EmptyFieldsException;
 import by.htp.shop.service.exception.LoginException;
 import by.htp.shop.service.exception.ServiceException;
 
-public class ClientImplService {
+public class ClientServiceImpl {
 	
 	public ClientData loginClient(String login, String password) throws ServiceException, LoginException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
-		ClientsDAO clientsDAO = daoObjectFactory.getClientImplDAO();
+		ClientDAO clientsDAO = daoObjectFactory.getClientImplDAO();
 
 		try {
 			ClientData clientData = clientsDAO.formClientData(login, password);
@@ -34,7 +34,7 @@ public class ClientImplService {
 	
 	public void checkLogin(String login) throws ServiceException, LoginException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
-		ClientsDAO clientsDAO = daoObjectFactory.getClientImplDAO();
+		ClientDAO clientsDAO = daoObjectFactory.getClientImplDAO();
 
 		try {
 			if (clientsDAO.isClientExist(login)) {
@@ -47,7 +47,7 @@ public class ClientImplService {
 	
 	public void registerClient (ClientData clientData) throws ServiceException{
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
-		ClientsDAO clientsDAO = daoObjectFactory.getClientImplDAO();
+		ClientDAO clientsDAO = daoObjectFactory.getClientImplDAO();
 		
 		try {
 			clientsDAO.addNewClient(clientData);

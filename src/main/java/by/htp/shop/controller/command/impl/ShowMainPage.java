@@ -17,7 +17,7 @@ import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
 import by.htp.shop.service.exception.ServiceException;
 import by.htp.shop.service.factory.ServiceFactory;
-import by.htp.shop.service.impl.ItemImplService;
+import by.htp.shop.service.impl.EquipmentServiceImpl;
 
 public class ShowMainPage implements Command {
 	private final static Logger LOGGER = Logger.getLogger(ShowMainPage.class);
@@ -30,12 +30,12 @@ public class ShowMainPage implements Command {
 	final String PAGE = "index.jsp";
 	final String USER = "user";
 	final String CATEGORY = "category";
-	final String ITEMS = "items";
+	final String EQUIPMENT = "equipment";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		ItemImplService itemService = serviceFactory.getItemImplService();
+		EquipmentServiceImpl eqipmentService = serviceFactory.getEquipmentServiceImpl();
 
 		RequestDispatcher dispatcher = null;
 
@@ -55,11 +55,11 @@ public class ShowMainPage implements Command {
 
 				if (clientData != null) {
 
-					List<Item> itemList = itemService.formItemList(currentCategory);
-					List<String> categoryList = itemService.formCategoryElementList();
+					List<Item> equipmentList = eqipmentService.formEquipmentList(currentCategory);
+					List<String> categoryList = eqipmentService.formCategoryElementList();
 
 					request.setAttribute(CATEGORY, categoryList);
-					request.setAttribute(ITEMS, itemList);
+					request.setAttribute(EQUIPMENT, equipmentList);
 
 					dispatcher = request.getRequestDispatcher(selectMainPage(clientData.getStatus()));
 				}

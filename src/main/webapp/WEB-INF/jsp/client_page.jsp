@@ -74,7 +74,7 @@
 	<table border="0" width="100%">
     <tr>
         <td width="100%" valign="top">
-			<c:forEach var="field" items="${items}">
+			<c:forEach var="field" items="${equipment}">
 				<table border="2" width="95%" bordercolor="D0D0D0">
 					<tr align="center">
 						<td rowspan="2" width="20%"><img src="img/${field.img}"></td>
