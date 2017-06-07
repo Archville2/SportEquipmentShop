@@ -68,15 +68,15 @@ public class EquipmentDAOImpl implements EquipmentDAO {
 			try (ResultSet rs = ps.executeQuery()) {
 
 				while (rs.next()) {
-					Item item = new Item.Builder(
-                        rs.getInt(ID),
-                        rs.getString(NAME),
-                        rs.getString(TYPE),
-                        rs.getString(DESCRIPTION),
-                        rs.getString(MANUFACTURER),
-                        rs.getInt(COST),
-                        rs.getString(IMG),
-                        null).build();
+					Item item = new Item.Builder().
+                        id(rs.getInt(ID)).
+                        name(rs.getString(NAME)).
+                        type(rs.getString(TYPE)).
+                        description(rs.getString(DESCRIPTION)).
+                        manufacturer(rs.getString(MANUFACTURER)).
+                        price(rs.getInt(COST)).
+                        img(rs.getString(IMG)).
+                        owner(0).build();
 					clientItems.add(item);
 				}
 				return clientItems;
@@ -131,15 +131,15 @@ public class EquipmentDAOImpl implements EquipmentDAO {
 				try (ResultSet rs = ps.executeQuery()) {
 
 					while (rs.next()) {
-						Item item = new Item.Builder(
-                            rs.getInt(ID),
-                            rs.getString(NAME),
-                            rs.getString(TYPE),
-                            rs.getString(DESCRIPTION),
-                            rs.getString(MANUFACTURER),
-                            rs.getInt(COST),
-                            rs.getString(IMG),
-                            null).build();
+						Item item = new Item.Builder().
+							id(rs.getInt(ID)).
+							name(rs.getString(NAME)).
+							type(rs.getString(TYPE)).
+							description(rs.getString(DESCRIPTION)).
+							manufacturer(rs.getString(MANUFACTURER)).
+							price(rs.getInt(COST)).
+							img(rs.getString(IMG)).
+							owner(0).build();
 						items.add(item);
 					}
 				}
@@ -171,15 +171,15 @@ public class EquipmentDAOImpl implements EquipmentDAO {
 			try (ResultSet rs = ps.executeQuery()) {
 
 				while (rs.next()) {
-					Item item = new Item.Builder(
-                        rs.getInt(ID),
-                        rs.getString(NAME),
-                        rs.getString(TYPE),
-                        rs.getString(DESCRIPTION),
-                        rs.getString(MANUFACTURER),
-                        rs.getInt(COST),
-                        rs.getString(IMG),
-                        rs.getString(CLIENT_ID)).build();
+					Item item = new Item.Builder().
+							id(rs.getInt(ID)).
+							name(rs.getString(NAME)).
+							type(rs.getString(TYPE)).
+							description(rs.getString(DESCRIPTION)).
+							manufacturer(rs.getString(MANUFACTURER)).
+							price(rs.getInt(COST)).
+							img(rs.getString(IMG)).
+							owner(rs.getInt(CLIENT_ID)).build();
 					items.add(item);
 				}
 

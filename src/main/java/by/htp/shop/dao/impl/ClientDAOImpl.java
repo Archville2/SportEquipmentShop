@@ -62,10 +62,15 @@ public class ClientDAOImpl implements ClientDAO {
             try (ResultSet rs = ps.executeQuery()){
             	while (rs.next()) {
 
-                return new ClientData(rs.getInt(1),
-                        rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getString(6), rs.getString(7),
-                        rs.getString(8));
+                return new ClientData.Builder().
+                		id(rs.getInt(1)).
+                        name(rs.getString(2)).
+                        surname(rs.getString(3)).
+                        email(rs.getString(4)).
+                        phone(rs.getString(5)).
+                        login(rs.getString(6)).
+                        password(rs.getString(7)).
+                        status(rs.getString(8)).build();
 				}
 			}
 			return null;

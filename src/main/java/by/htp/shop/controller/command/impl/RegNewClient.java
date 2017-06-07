@@ -33,15 +33,15 @@ public class RegNewClient implements Command {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		ClientService clientService = serviceFactory.getClientServiceImpl();
 		
-		ClientData clientData = new ClientData(
-				0,
-				request.getParameter("name"),
-				request.getParameter("surname"), 
-				request.getParameter("email"),
-				request.getParameter("phone"),
-				request.getParameter("login"), 
-				request.getParameter("password"), 
-				"user");
+		ClientData clientData = new ClientData.Builder().
+				id(0).
+				name(request.getParameter("name")).
+				surname(request.getParameter("surname")). 
+				email(request.getParameter("email")).
+				phone(request.getParameter("phone")).
+				login(request.getParameter("login")). 
+				password(request.getParameter("password")). 
+				status("user").build();
 
 		String message = REGISTRATION_DONE_MESSAGE;
 

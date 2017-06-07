@@ -16,7 +16,7 @@ public class Item implements Serializable {
 	private final String manufacturer;
 	private final int price;
 	private final String img;
-	private final String owner;
+	private final int owner;
 
 	public int getId() {
 		return id;
@@ -46,32 +46,60 @@ public class Item implements Serializable {
 		return img;
 	}
 
-	public String getOwner() {
+	public int getOwner() {
 		return owner;
 	}
 
 	public static class Builder {
-		private final int id;
-		private final String name;
-		private final String type;
-		private final String description;
-		private final String manufacturer;
-		private final int price;
-		private final String img;
-		private final String owner;
+		private int id;
+		private String name;
+		private String type;
+		private String description;
+		private String manufacturer;
+		private int price;
+		private String img;
+		private int owner;
 
-		public Builder(int id, String name, String type, String description, String manufacturer, int price,
-				String img, String owner) {
+		public Builder id(int id){
 			this.id = id;
+			return this;
+		}
+			
+		public Builder name(String name){
 			this.name = name;
-			this.type = type;
-			this.description = description;
-			this.manufacturer = manufacturer;
-			this.price = price;
-			this.img = img;
-			this.owner = owner;
+			return this;
 		}
 
+		public Builder type(String type){
+			this.type = type;
+			return this;
+		}
+		
+		public Builder description(String description){
+			this.description = description;
+			return this;
+		}
+		
+		public Builder manufacturer(String manufacturer){
+			this.manufacturer = manufacturer;
+			return this;
+		}
+		
+		public Builder price(int price){
+			this.price = price;
+			return this;
+		}
+		
+		public Builder img(String img){
+			this.img = img;
+			return this;
+		}
+		
+		public Builder owner(int owner){
+			this.owner = owner;
+			return this;
+		}
+		
 		public Item build() {
 			return new Item(this);
 		}

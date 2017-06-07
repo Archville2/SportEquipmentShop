@@ -88,10 +88,10 @@
 						<td>
 							<form action="Controller" target="dummyframe" method="post">
 							<input type="hidden" name="command" value="add_to_cart" /> 
-							<c:if test = "${field.owner == null}">
+							<c:if test = "${field.owner == '0'}">
 								<input type="image" name="cart" value="${field.id}" src="img/icon_cart.gif" width="32" height="32" >
 							</c:if>
-							<c:if test = "${field.owner != null}">
+							<c:if test = "${field.owner != '0'}">
 								 <p align="center">Товар недоступен</p>
 							</c:if>
 							</form>
