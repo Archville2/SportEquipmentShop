@@ -11,6 +11,10 @@ import javax.servlet.http.HttpSession;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
 
+/**
+ * Command for taking url from session and redirecting this url
+ */
+
 public class GoTo implements Command {
 	private static final String GO_TO_PAGE = "go_to_page";
 	private static final String URL = "url";

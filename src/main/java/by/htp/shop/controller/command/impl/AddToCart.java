@@ -12,6 +12,12 @@ import by.htp.shop.controller.exception.ControllerException;
 import by.htp.shop.service.EquipmentService;
 import by.htp.shop.service.factory.ServiceFactory;
 
+/**
+ * Add equipment to cart command implementation. Using list of integer id's to
+ * store equipment id. Checking if equipment id already in list and if it is not
+ * add new id to cart.
+ */
+
 public class AddToCart implements Command {
 
 	private final static String CART = "cart";

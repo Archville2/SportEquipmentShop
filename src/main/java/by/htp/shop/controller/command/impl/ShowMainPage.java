@@ -15,9 +15,9 @@ import by.htp.shop.bean.ClientData;
 import by.htp.shop.bean.Item;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
-import by.htp.shop.page.SelectJSPPage;
+import by.htp.shop.page.PageSelector;
 import by.htp.shop.page.exception.PageException;
-import by.htp.shop.page.factory.SelectJSPPageFactory;
+import by.htp.shop.page.factory.PageSelectorFactory;
 import by.htp.shop.service.EquipmentService;
 import by.htp.shop.service.exception.ServiceException;
 import by.htp.shop.service.factory.ServiceFactory;
@@ -27,24 +27,24 @@ public class ShowMainPage implements Command {
 
 	private final String URL = "url";
 	private final String USER = "user";
-	private final String INDEX = "indexx";
+	private final String INDEX = "index";
 	private final String CATEGORY = "category";
 	private final String EQUIPMENT = "equipment";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		SelectJSPPageFactory selectJSPPageFactory = SelectJSPPageFactory.getInstance();
-		
-		SelectJSPPage selectJSPPage = selectJSPPageFactory.getSelectJSPPageImpl();
+		PageSelectorFactory selectJSPPageFactory = PageSelectorFactory.getInstance();
+
+		PageSelector selectJSPPage = selectJSPPageFactory.getPageSelectorImpl();
 		EquipmentService eqipmentService = serviceFactory.getEquipmentServiceImpl();
 
 		RequestDispatcher dispatcher = null;
 
 		try {
 			HttpSession session = request.getSession(true);
-			session.setAttribute(URL, selectJSPPage.GetPageURL(INDEX));
-			dispatcher = request.getRequestDispatcher(selectJSPPage.GetPageURL(INDEX));
+			session.setAttribute(URL, selectJSPPage.getPageURL(INDEX));
+			dispatcher = request.getRequestDispatcher(selectJSPPage.getPageURL(INDEX));
 
 			String currentCategory = (String) request.getParameter(CATEGORY);
 			
@@ -63,7 +63,7 @@ public class ShowMainPage implements Command {
 					request.setAttribute(CATEGORY, categoryList);
 					request.setAttribute(EQUIPMENT, equipmentList);
 
-					dispatcher = request.getRequestDispatcher(selectJSPPage.GetPageURL(clientData.getStatus()));
+					dispatcher = request.getRequestDispatcher(selectJSPPage.getPageURL(clientData.getStatus()));
 				}
 			}
 			dispatcher.forward(request, response);

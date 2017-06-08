@@ -15,9 +15,9 @@ import by.htp.shop.bean.ClientData;
 import by.htp.shop.bean.Item;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
-import by.htp.shop.page.SelectJSPPage;
+import by.htp.shop.page.PageSelector;
 import by.htp.shop.page.exception.PageException;
-import by.htp.shop.page.factory.SelectJSPPageFactory;
+import by.htp.shop.page.factory.PageSelectorFactory;
 import by.htp.shop.service.ClientService;
 import by.htp.shop.service.EquipmentService;
 import by.htp.shop.service.exception.LoginException;
@@ -31,7 +31,7 @@ import by.htp.shop.service.factory.ServiceFactory;
  */
 
 public class LoginClient implements Command {
-	final static Logger LOGGER = Logger.getLogger(LoginClient.class);
+	private final static Logger LOGGER = Logger.getLogger(LoginClient.class);
 
 	private final static String LOGIN_PARAMETER = "login";
 	private final static String PASSWORD_PARAMETER = "password";
@@ -42,9 +42,9 @@ public class LoginClient implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		SelectJSPPageFactory selectJSPPageFactory = SelectJSPPageFactory.getInstance();
-		
-		SelectJSPPage selectJSPPage = selectJSPPageFactory.getSelectJSPPageImpl();
+		PageSelectorFactory selectJSPPageFactory = PageSelectorFactory.getInstance();
+
+		PageSelector selectJSPPage = selectJSPPageFactory.getPageSelectorImpl();
 		ClientService clientService = serviceFactory.getClientServiceImpl();
 		EquipmentService equipmentService = serviceFactory.getEquipmentServiceImpl();
 
@@ -66,14 +66,14 @@ public class LoginClient implements Command {
 				session.setAttribute("user", clientData);
 				session.setAttribute("url", "Controller?command=show_main_page");
 			}
-			dispatcher = request.getRequestDispatcher(selectJSPPage.GetPageURL(clientData.getStatus()));
+			dispatcher = request.getRequestDispatcher(selectJSPPage.getPageURL(clientData.getStatus()));
 			dispatcher.forward(request, response);
 
 		} catch (LoginException ex) {
 
 			try {
 				request.setAttribute("message", INCORRECT_LOGIN_CODE);
-				dispatcher = request.getRequestDispatcher(selectJSPPage.GetPageURL(INDEX));
+				dispatcher = request.getRequestDispatcher(selectJSPPage.getPageURL(INDEX));
 				dispatcher.forward(request, response);
 
 			} catch (PageException e) {
