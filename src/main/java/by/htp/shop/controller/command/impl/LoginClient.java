@@ -16,7 +16,7 @@ import by.htp.shop.bean.Item;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
 import by.htp.shop.page.PageSelector;
-import by.htp.shop.page.exception.PageException;
+import by.htp.shop.page.exception.PageNotFoundException;
 import by.htp.shop.page.factory.PageSelectorFactory;
 import by.htp.shop.service.ClientService;
 import by.htp.shop.service.EquipmentService;
@@ -76,18 +76,15 @@ public class LoginClient implements Command {
 				dispatcher = request.getRequestDispatcher(selectJSPPage.getPageURL(INDEX));
 				dispatcher.forward(request, response);
 
-			} catch (PageException e) {
+			} catch (PageNotFoundException e) {
 				throw new ControllerException(e.getMessage(), e);
 
-			} catch (ServletException | IOException e1) {
-				LOGGER.error(e1.getMessage(), e1);
-				throw new ControllerException("exception in LoginClient", e1);
+			} catch (ServletException | IOException e) {
+				LOGGER.error(e.getMessage(), e);
+				throw new ControllerException("exception in LoginClient", e);
 			}
 
-		} catch (ServiceException e) {
-			throw new ControllerException(e.getMessage(), e);
-
-		} catch (PageException e) {
+		} catch (ServiceException | PageNotFoundException e) {
 			throw new ControllerException(e.getMessage(), e);
 
 		} catch (ServletException | IOException e) {

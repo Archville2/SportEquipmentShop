@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
 import by.htp.shop.page.PageSelector;
-import by.htp.shop.page.exception.PageException;
+import by.htp.shop.page.exception.PageNotFoundException;
 import by.htp.shop.page.factory.PageSelectorFactory;
 
 public class ChangeLanguage implements Command {
@@ -36,7 +36,7 @@ public class ChangeLanguage implements Command {
 			}
 			try {
 				response.sendRedirect(selectJSPPage.getPageURL(INDEX));
-			} catch (PageException e) {
+			} catch (PageNotFoundException e) {
 				throw new ControllerException(e.getMessage(), e);
 			}
 

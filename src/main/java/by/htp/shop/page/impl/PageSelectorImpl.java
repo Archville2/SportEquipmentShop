@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import by.htp.shop.page.PageSelector;
-import by.htp.shop.page.exception.PageException;
+import by.htp.shop.page.exception.PageNotFoundException;
 
 public class PageSelectorImpl implements PageSelector {
 	private final Map<String, String> pages = new HashMap<>();
@@ -19,13 +19,13 @@ public class PageSelectorImpl implements PageSelector {
 		pages.put("index", "index.jsp");
 	}
 
-	public String getPageURL(String message) throws PageException {
+	public String getPageURL(String message) throws PageNotFoundException {
 
 		String result = pages.get(message);
 
 		if (result != null) {
 			return result;
 		}
-		throw new PageException("incorrect key value");
+		throw new PageNotFoundException("incorrect key value");
 	}
 }
