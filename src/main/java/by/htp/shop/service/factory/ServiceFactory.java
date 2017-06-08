@@ -8,8 +8,8 @@ import by.htp.shop.service.impl.EquipmentServiceImpl;
 public final class ServiceFactory {
 	private static final ServiceFactory instance = new ServiceFactory();
 
-	private final ClientServiceImpl clientServiceImpl = new ClientServiceImpl();
-	private final EquipmentServiceImpl equipmentServiceImpl = new EquipmentServiceImpl();
+	private final ClientService clientService = new ClientServiceImpl();
+	private final EquipmentService equipmentService = new EquipmentServiceImpl();
 
 	private ServiceFactory() {
 	}
@@ -19,11 +19,11 @@ public final class ServiceFactory {
 	}
 
 	public ClientService getClientServiceImpl() {
-		return clientServiceImpl;
+		return clientService;
 	}
 	
 	public EquipmentService getEquipmentServiceImpl() {
-		return equipmentServiceImpl;
+		return equipmentService;
 	}
 	
 }

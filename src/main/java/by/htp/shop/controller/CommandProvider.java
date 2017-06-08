@@ -16,7 +16,6 @@ import by.htp.shop.controller.command.impl.ShowCart;
 import by.htp.shop.controller.command.impl.ShowMainPage;
 import by.htp.shop.controller.command.impl.ShowClientEquipment;
 import by.htp.shop.controller.command.impl.ShowRegPage;
-import by.htp.shop.controller.exception.ControllerException;
 import by.htp.shop.controller.exception.IncorrectCommandException;
 import by.htp.shop.controller.exception.NullCommandException;
 
@@ -40,7 +39,7 @@ final class CommandProvider {
 		repository.put(CommandName.RETURN_ITEM, new ReturnEquipment());
 	}
 
-	Command getCommand(String name) throws ControllerException, NullCommandException, IncorrectCommandException {
+	Command getCommand(String name) throws NullCommandException, IncorrectCommandException {
 		try {
 			if (name == null) {
 				throw new NullCommandException("null in command");

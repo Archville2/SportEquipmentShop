@@ -15,6 +15,9 @@ import by.htp.shop.bean.ClientData;
 import by.htp.shop.bean.Item;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
+import by.htp.shop.page.SelectJSPPage;
+import by.htp.shop.page.exception.PageException;
+import by.htp.shop.page.factory.SelectJSPPageFactory;
 import by.htp.shop.service.ClientService;
 import by.htp.shop.service.EquipmentService;
 import by.htp.shop.service.exception.LoginException;
@@ -24,7 +27,7 @@ import by.htp.shop.service.factory.ServiceFactory;
 /**
  * Perform login class. Execution order - get client's info from db, check
  * clients's status, show start page according to user status. If there is no
- * info about client in db - show no user page.
+ * info about client in db - show error page.
  */
 
 public class LoginClient implements Command {
@@ -32,16 +35,16 @@ public class LoginClient implements Command {
 
 	private final static String LOGIN_PARAMETER = "login";
 	private final static String PASSWORD_PARAMETER = "password";
-	private final static String INDEX_PAGE = "index.jsp";
-	private final static String ERROR_PAGE = "/WEB-INF/jsp/error_page.jsp";
-	private final static String CLIENT_PAGE = "/WEB-INF/jsp/client_page.jsp";
-	private final static String ADMIN_PAGE = "/WEB-INF/jsp/admin_page.jsp";
+	private final static String INDEX = "index";
 
 	private final static String INCORRECT_LOGIN_CODE = "login_incorrect";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
+		SelectJSPPageFactory selectJSPPageFactory = SelectJSPPageFactory.getInstance();
+		
+		SelectJSPPage selectJSPPage = selectJSPPageFactory.getSelectJSPPageImpl();
 		ClientService clientService = serviceFactory.getClientServiceImpl();
 		EquipmentService equipmentService = serviceFactory.getEquipmentServiceImpl();
 
@@ -63,15 +66,18 @@ public class LoginClient implements Command {
 				session.setAttribute("user", clientData);
 				session.setAttribute("url", "Controller?command=show_main_page");
 			}
-			dispatcher = request.getRequestDispatcher(selectMainPage(clientData.getStatus()));
+			dispatcher = request.getRequestDispatcher(selectJSPPage.GetPageURL(clientData.getStatus()));
 			dispatcher.forward(request, response);
 
-		} catch (LoginException e) {
-			request.setAttribute("message", INCORRECT_LOGIN_CODE);
-			dispatcher = request.getRequestDispatcher(INDEX_PAGE);
+		} catch (LoginException ex) {
 
 			try {
+				request.setAttribute("message", INCORRECT_LOGIN_CODE);
+				dispatcher = request.getRequestDispatcher(selectJSPPage.GetPageURL(INDEX));
 				dispatcher.forward(request, response);
+
+			} catch (PageException e) {
+				throw new ControllerException(e.getMessage(), e);
 
 			} catch (ServletException | IOException e1) {
 				LOGGER.error(e1.getMessage(), e1);
@@ -81,20 +87,13 @@ public class LoginClient implements Command {
 		} catch (ServiceException e) {
 			throw new ControllerException(e.getMessage(), e);
 
+		} catch (PageException e) {
+			throw new ControllerException(e.getMessage(), e);
+
 		} catch (ServletException | IOException e) {
 			LOGGER.error(e.getMessage(), e);
 			throw new ControllerException("exception in LoginClient", e);
 		}
 
-	}
-	
-	private String selectMainPage (String status){
-		if (status.equals("user")) {
-			return CLIENT_PAGE;
-		}
-		if (status.equals("admin")) {
-			return ADMIN_PAGE;
-		}
-		return ERROR_PAGE;
 	}
 }

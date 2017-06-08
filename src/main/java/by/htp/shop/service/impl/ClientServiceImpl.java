@@ -14,7 +14,7 @@ public class ClientServiceImpl implements ClientService{
 	@Override
 	public ClientData loginClient(String login, String password) throws ServiceException, LoginException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
-		ClientDAO clientsDAO = daoObjectFactory.getClientImplDAO();
+		ClientDAO clientsDAO = daoObjectFactory.getClientDAOImpl();
 
 		try {
 			ClientData clientData = clientsDAO.formClientData(login, password);
@@ -38,7 +38,7 @@ public class ClientServiceImpl implements ClientService{
 	@Override
 	public void checkLogin(String login) throws ServiceException, LoginException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
-		ClientDAO clientsDAO = daoObjectFactory.getClientImplDAO();
+		ClientDAO clientsDAO = daoObjectFactory.getClientDAOImpl();
 
 		try {
 			if (clientsDAO.isClientExist(login)) {
@@ -52,7 +52,7 @@ public class ClientServiceImpl implements ClientService{
 	@Override
 	public void registerClient (ClientData clientData) throws ServiceException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
-		ClientDAO clientsDAO = daoObjectFactory.getClientImplDAO();
+		ClientDAO clientsDAO = daoObjectFactory.getClientDAOImpl();
 		
 		try {
 			clientsDAO.addNewClient(clientData);

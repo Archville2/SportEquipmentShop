@@ -15,6 +15,9 @@ import by.htp.shop.bean.ClientData;
 import by.htp.shop.bean.Item;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
+import by.htp.shop.page.SelectJSPPage;
+import by.htp.shop.page.exception.PageException;
+import by.htp.shop.page.factory.SelectJSPPageFactory;
 import by.htp.shop.service.EquipmentService;
 import by.htp.shop.service.exception.ServiceException;
 import by.htp.shop.service.factory.ServiceFactory;
@@ -22,27 +25,26 @@ import by.htp.shop.service.factory.ServiceFactory;
 public class ShowMainPage implements Command {
 	private final static Logger LOGGER = Logger.getLogger(ShowMainPage.class);
 
-	private final static String ERROR_PAGE = "/WEB-INF/jsp/error_page.jsp";
-	private final static String CLIENT_PAGE = "/WEB-INF/jsp/client_page.jsp";
-	private final static String ADMIN_PAGE = "/WEB-INF/jsp/admin_page.jsp";
-
-	final String URL = "url";
-	final String PAGE = "index.jsp";
-	final String USER = "user";
-	final String CATEGORY = "category";
-	final String EQUIPMENT = "equipment";
+	private final String URL = "url";
+	private final String USER = "user";
+	private final String INDEX = "indexx";
+	private final String CATEGORY = "category";
+	private final String EQUIPMENT = "equipment";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
+		SelectJSPPageFactory selectJSPPageFactory = SelectJSPPageFactory.getInstance();
+		
+		SelectJSPPage selectJSPPage = selectJSPPageFactory.getSelectJSPPageImpl();
 		EquipmentService eqipmentService = serviceFactory.getEquipmentServiceImpl();
 
 		RequestDispatcher dispatcher = null;
 
 		try {
 			HttpSession session = request.getSession(true);
-			session.setAttribute(URL, PAGE);
-			dispatcher = request.getRequestDispatcher(PAGE);
+			session.setAttribute(URL, selectJSPPage.GetPageURL(INDEX));
+			dispatcher = request.getRequestDispatcher(selectJSPPage.GetPageURL(INDEX));
 
 			String currentCategory = (String) request.getParameter(CATEGORY);
 			
@@ -61,28 +63,21 @@ public class ShowMainPage implements Command {
 					request.setAttribute(CATEGORY, categoryList);
 					request.setAttribute(EQUIPMENT, equipmentList);
 
-					dispatcher = request.getRequestDispatcher(selectMainPage(clientData.getStatus()));
+					dispatcher = request.getRequestDispatcher(selectJSPPage.GetPageURL(clientData.getStatus()));
 				}
 			}
 			dispatcher.forward(request, response);
 			
 		} catch (ServiceException e) {
 			throw new ControllerException(e.getMessage(), e);
-			
+
+		} catch (PageException e) {
+			throw new ControllerException(e.getMessage(), e);
+
 		} catch (ServletException | IOException e) {
 			LOGGER.error(e.getMessage(), e);
 			throw new ControllerException("exception in ShowMainPage", e);
 		}
 
-	}
-
-	private String selectMainPage(String status) {
-		if (status.equals("user")) {
-			return CLIENT_PAGE;
-		}
-		if (status.equals("admin")) {
-			return ADMIN_PAGE;
-		}
-		return ERROR_PAGE;
 	}
 }

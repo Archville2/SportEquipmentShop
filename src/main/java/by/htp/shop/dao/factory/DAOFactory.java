@@ -37,7 +37,7 @@ public final class DAOFactory {
 		return instance;
 	}
 
-	public ClientDAO getClientImplDAO() {
+	public ClientDAO getClientDAOImpl() {
 		return new ClientDAOImpl(dataSource);
 	}
 

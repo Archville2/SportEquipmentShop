@@ -7,7 +7,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import by.htp.shop.controller.exception.ControllerException;
+import by.htp.shop.controller.exception.IncorrectCommandException;
+import by.htp.shop.controller.exception.NullCommandException;
 
 /**
  * For testing incoming commands
@@ -16,7 +17,7 @@ import by.htp.shop.controller.exception.ControllerException;
  * @return 	ControllerException if incorrect command
  */
 
-/*public class CommandProviderTest extends Assert {
+public class CommandProviderTest extends Assert {
 	CommandProvider provider;
 
 	@Before
@@ -31,25 +32,23 @@ import by.htp.shop.controller.exception.ControllerException;
 	
 	@Rule
     public ExpectedException thrown = ExpectedException.none();
-
-	@Test
-	public void correctCommandTest() throws ControllerException{
-
-		thrown.expect(ControllerException.class);
-		
-		provider.getCommand("show_reg_page");
-	}
 	
-	@Test(expected = ControllerException.class)
-	public void incorrectCommandTest() throws ControllerException {
+	@Test(expected = IncorrectCommandException.class)
+	public void incorrectCommandTest() throws IncorrectCommandException, NullCommandException {
 
 		provider.getCommand("show_reg page");
 	}
 	
-	@Test(expected = ControllerException.class)
-	public void emptyCommandTest() throws ControllerException {
+	@Test(expected = IncorrectCommandException.class)
+	public void emptyCommandTest() throws IncorrectCommandException, NullCommandException {
 
 		provider.getCommand("");
 	}
+	
+	@Test(expected = NullCommandException.class)
+	public void nullCommandTest() throws IncorrectCommandException, NullCommandException {
 
-}*/
+		provider.getCommand(null);
+	}
+
+}
