@@ -34,17 +34,17 @@ public class ShowMainPage implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		PageSelectorFactory selectJSPPageFactory = PageSelectorFactory.getInstance();
+		PageSelectorFactory pageSelectorFactory = PageSelectorFactory.getInstance();
 
-		PageSelector selectJSPPage = selectJSPPageFactory.getPageSelectorImpl();
+		PageSelector pageSelector = pageSelectorFactory.getPageSelectorImpl();
 		EquipmentService eqipmentService = serviceFactory.getEquipmentServiceImpl();
 
 		RequestDispatcher dispatcher = null;
 
 		try {
 			HttpSession session = request.getSession(true);
-			session.setAttribute(URL, selectJSPPage.getPageURL(INDEX));
-			dispatcher = request.getRequestDispatcher(selectJSPPage.getPageURL(INDEX));
+			session.setAttribute(URL, pageSelector.getPageURL(INDEX));
+			dispatcher = request.getRequestDispatcher(pageSelector.getPageURL(INDEX));
 
 			String currentCategory = (String) request.getParameter(CATEGORY);
 			
@@ -63,7 +63,7 @@ public class ShowMainPage implements Command {
 					request.setAttribute(CATEGORY, categoryList);
 					request.setAttribute(EQUIPMENT, equipmentList);
 
-					dispatcher = request.getRequestDispatcher(selectJSPPage.getPageURL(clientData.getStatus()));
+					dispatcher = request.getRequestDispatcher(pageSelector.getPageURL(clientData.getStatus()));
 				}
 			}
 			dispatcher.forward(request, response);

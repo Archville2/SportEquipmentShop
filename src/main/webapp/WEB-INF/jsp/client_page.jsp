@@ -57,17 +57,7 @@
             	<input class="new" type="submit" value="выбрать"/>
             </form>
 			</td>
-			<td>Тип товара:
-			<form action="Controller" method="post">
-				<select name="D2" size="1">
-					<option>*</option>
-                	<option>Велосипеды</option>
-                	<option>Самокаты</option>
-                	<option>Лыжи</option>
-            	</select>
-            	<input class="new" type="submit" value="выбрать"/>
-            </form>
-			</td>
+			
 		</tr>
 	</table>
 
