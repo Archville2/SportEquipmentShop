@@ -15,7 +15,7 @@ public class PageSelectorImpl implements PageSelector {
 		pages.put("error", "/WEB-INF/jsp/error_page.jsp");
 		pages.put("reg", "/WEB-INF/jsp/reg_client.jsp");
 		pages.put("cart", "/WEB-INF/jsp/show_cart.jsp");
-		pages.put("my", "/WEB-INF/jsp/my_items.jsp");
+		pages.put("my", "/WEB-INF/jsp/client_items.jsp");
 		pages.put("index", "index.jsp");
 	}
 

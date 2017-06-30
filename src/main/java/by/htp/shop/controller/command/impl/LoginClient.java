@@ -53,7 +53,7 @@ public class LoginClient implements Command {
 		String password = request.getParameter(PASSWORD_PARAMETER);
 
 		try {
-			ClientData clientData = clientService.loginClient(login, password);
+			ClientData clientData = clientService.getClientData(login, password);
 	
 			if (clientData != null) {
 

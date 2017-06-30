@@ -6,7 +6,7 @@ import by.htp.shop.service.exception.LoginException;
 import by.htp.shop.service.exception.ServiceException;
 
 public interface ClientService {
-	ClientData loginClient(String login, String password) throws ServiceException, LoginException;
+	ClientData getClientData(String login, String password) throws ServiceException, LoginException;
 
 	void checkEmptyFields(ClientData clientData) throws EmptyFieldsException;
 

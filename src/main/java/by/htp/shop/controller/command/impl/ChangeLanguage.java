@@ -31,14 +31,14 @@ public class ChangeLanguage implements Command {
 		String url = (String) request.getSession(true).getAttribute(URL);
 
 		try {
-			if (url != null) {
-				response.sendRedirect(url);
+			if (url == null) {
+				url = selectJSPPage.getPageURL(INDEX);
 			}
-			try {
-				response.sendRedirect(selectJSPPage.getPageURL(INDEX));
-			} catch (PageNotFoundException e) {
-				throw new ControllerException(e.getMessage(), e);
-			}
+
+			response.sendRedirect(url);
+
+		} catch (PageNotFoundException e) {
+			throw new ControllerException(e.getMessage(), e);
 
 		} catch (IOException e) {
 			LOGGER.error(e.getMessage(), e);

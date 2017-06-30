@@ -31,19 +31,7 @@
 		}
 	</script>
 
-	<table border="0" width="100%">
-		<tr align="center">
-			<td width="20%"></td>
-			<td width="60%"><img src="img/shop_logo.gif"></td>
-			<td width="20%" valign="top" align="right">
-				<form action="Controller" method="post">
-					<input type="hidden" name="command" value="change_language" /> 
-					<input type="image" name="locale" value="en" src="img/uk_flag.png" width="32" height="32" /> 
-					<input type="image" name="locale" value="ru" src="img/ru_flag.png" width="32" height="32" />
-				</form>
-			</td>
-		</tr>
-	</table>
+<jsp:include page="shop_logo.jsp" />
 
 	<br>
 

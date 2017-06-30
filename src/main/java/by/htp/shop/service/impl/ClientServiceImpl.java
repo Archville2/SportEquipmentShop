@@ -12,7 +12,7 @@ import by.htp.shop.service.exception.ServiceException;
 public class ClientServiceImpl implements ClientService{
 	
 	@Override
-	public ClientData loginClient(String login, String password) throws ServiceException, LoginException {
+	public ClientData getClientData(String login, String password) throws ServiceException, LoginException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
 		ClientDAO clientsDAO = daoObjectFactory.getClientDAOImpl();
 
